@@ -2,6 +2,7 @@ name: Exploring Variables and Secrets
 on: [push]
 
 
+
 env:
   CONTAINER_REGISTRY: docker.io
   IMAGE_NAME: nodejs-test-app
@@ -11,10 +12,13 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2  
+        
       - name: Docker Build
         run: |
           docker build \
-            -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+            -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
 
 
       - name: Docker Login
